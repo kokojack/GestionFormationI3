@@ -1,0 +1,5 @@
+<?php
+/*
+ * couche Models
+ */
+?>
