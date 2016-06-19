@@ -34,7 +34,7 @@
 			</h4>
 			<!-- TODO création de la page backUpPassword -->
 			<h4>
-				<a href="backUpPassWord.php"> Mot de passe oublié? </a>
+				<a href="index.php?page=Controllers/disclaimer.php"> Mot de passe oublié? </a>
 			</h4>
 		</fieldset>
 	</form>

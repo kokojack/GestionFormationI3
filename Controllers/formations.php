@@ -4,14 +4,20 @@
  */
 //require_once 'C:/DEV/php/phpProjects/EasyPHP-DevServer-14.1VC9/data/localweb/projects/GestionFormationI3/Models/formations.php';
 require_once 'Models/formations.php';
-session_start();
+
 
 	if (isset($_POST['choisir']))
 	{
+			session_start();
 			extract($_POST);
 			$mail = $_SESSION['email'];
 			$num = $_SESSION['num'];
-			echo choixFormation($num, $mail);
+// 			var_dump( $num);
+// 			var_dump($mail);
+// 			var_dump(findUserByMail($mail));
+// 			var_dump(addValiderFormation($num, findUserByMail($mail)));
+// 			var_dump(choixFormation($num, $mail));
+			echo '<center><h4>'.choixFormation($num, $mail).'</h4></center>';
 	}
 	
 	if (isset($_POST['retour']))

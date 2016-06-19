@@ -19,15 +19,16 @@
 
 		
 		<?php 
-		$training = formationDisponible();
+		$training = formationDisponible($_SESSION['email']);
 		
 		
 		if ($training == "VIDE" )
-			echo "Pas de formation disponible pour le moment";
+			echo "PAS DE FORMATIONS DISPONIBLES POUR LE MOMENT <br><hr width='50%' /><br><br><br>";
 		else
 			{
 				$i = 0;
-				while ($i < sizeof(formationDisponible())){?>
+				$disponibles = formationDisponible($_SESSION['email']);
+				while ($i < sizeof($disponibles)){?>
 				<form action="#" method="POST">
 				<?php 
 				echo '<hr width="30%" />';
@@ -45,6 +46,7 @@
 				echo '<br><br><br>';
 				$i++;
 				}
+				echo '<hr width="100%" />';
 			}
 		?>
 		
@@ -53,19 +55,20 @@
 		<?php 
 		
 		
-		if (formationIndisponible() == "VIDE" )
-			echo "Pas de formation disponible pour le moment";
+		if (formationIndisponible($_SESSION['email']) == "VIDE" )
+			echo "PAS DE FORMATIONS INDISPONIBLES POUR LE MOMENT";
 		else
 			{
 				$i = 0; 
-				while ($result = formationIndisponible() and $i < sizeof(formationIndisponible()))
+				$result = formationIndisponible($_SESSION['email']);
+				while ($i < sizeof($result))
 				{
 					echo '<hr width="30%" />';
 					echo 'Formateur : '.$result[$i]['prestaFormation'].'<br><br>';
 					echo 'Date de formation : '.$result[$i]['dateFormation'].'<br><br>';
 					echo 'Durée de formation : '.$result[$i]['dureeFormation'].' jour (s) <br><br>';
-					echo 'Adresse : '.$result[$i]['lieuFormation'].'<br><br>';
-					echo 'crédits : '.$result[$i]['creditFormation'].'<br><br>';
+					echo 'Adresse de formation : '.$result[$i]['lieuFormation'].'<br><br>';
+					echo 'crédits de formation : '.$result[$i]['creditFormation'].'<br><br>';
 					echo 'intitulé de formation : '.$result[$i]['contenuFormation'].'<br><br><br><br>';
 					$i++;
 				}

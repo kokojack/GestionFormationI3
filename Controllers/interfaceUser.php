@@ -71,7 +71,7 @@ if (isset($_POST['chooseTraining']))
 	if (isset($_SESSION['ct']))
 	{
 // 		unset($_SESSION['ct']);
-		header('location:index.php?page=controllers/formations.php');
+		header('location:index.php?page=Controllers/formations.php');
 //		$training = formationDisponible();
 	}
 	else 

@@ -62,7 +62,7 @@ if (isset ( $_POST ['submit'] )) {
 	}
 	else 
 	{
-		echo 'Vérifiez vos identifiants de connexion';
+		echo '<center><h2>Vérifiez vos identifiants de connexion</h2></center>';
 	}
 }
 

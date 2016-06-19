@@ -76,7 +76,7 @@ if (isset ( $_GET ['page'] )) {
 			else
 				require_once 'Controllers/404.php';
 	}
-	elseif ($_GET['page'] == 'controllers/formations.php')
+	elseif ($_GET['page'] == 'Controllers/formations.php')
 	{
 		require_once $_GET['page'];
 	}
