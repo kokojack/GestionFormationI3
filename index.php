@@ -81,13 +81,15 @@ if (isset ( $_GET ['page'] )) {
 		require_once $_GET['page'];
 	}
 	
+	if (isset($_GET['page']))
+		echo $_GET ['page'].'<br>';
 	
-	echo $_GET ['page'].'<br>';
 	echo $_COOKIE['disc'].'<br>';
 } 
 else 
 {
-	echo $_GET ['page'].'<br>';
+	if (isset($_GET['page']))
+		echo $_GET ['page'].'<br>';
 	require_once 'Controllers/disclaimer.php';
 }
 

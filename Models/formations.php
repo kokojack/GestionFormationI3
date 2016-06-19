@@ -7,7 +7,8 @@ function formationDisponible($mail){
 	$format = "yyyy-mm-dd";
 	$date = date($format);
 	$numUtilisateur = findUserByMail($mail);
-	$sql = "select f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, f.lieuFormation, f.creditFormation, contenuFormation 
+	$sql = "select f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
+			f.lieuFormation, f.creditFormation, contenuFormation 
 			from f_formation f, f_choisirformation cf
 			where f.dateFormation > CURDATE() 
 			and (select count(*) from f_choisirformation
@@ -36,13 +37,15 @@ function formationIndisponible($mail)
 	$format = "yyyy-mm-dd";
 	$date = date($format);
 	$numUtilisateur = findUserByMail($mail);
-	$sql = "select numFormation, prestaFormation, dateFormation, dureeFormation, lieuFormation, creditFormation, contenuFormation 
-			from f_formation where dateFormation < CURDATE() 
+	$sql = "select f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
+			f.lieuFormation, f.creditFormation, f.contenuFormation 
+			from f_formation f, f_choisirformation cf 
+			where dateFormation < CURDATE() 
 			or
 			(select count(*) from f_choisirformation
 				 where cf.numUtilisateur = (:lutilisateur)
 				 and cf.numFormation = f.numFormation) != 0
-			order by numFormation";
+			order by f.numFormation";
 	$stmt = $pdo->prepare ( $sql );
 	//$stmt->bindParam(':dateFormation', $date);
 	$stmt->bindParam(':lutilisateur', $numUtilisateur);

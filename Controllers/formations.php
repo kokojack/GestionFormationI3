@@ -5,12 +5,12 @@
 //require_once 'C:/DEV/php/phpProjects/EasyPHP-DevServer-14.1VC9/data/localweb/projects/GestionFormationI3/Models/formations.php';
 require_once 'Models/formations.php';
 
+session_start();
+$mail = $_SESSION['email'];
 
 	if (isset($_POST['choisir']))
 	{
-			session_start();
 			extract($_POST);
-			$mail = $_SESSION['email'];
 			$num = $_SESSION['num'];
 // 			var_dump( $num);
 // 			var_dump($mail);
