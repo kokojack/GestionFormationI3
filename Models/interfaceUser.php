@@ -61,17 +61,20 @@ function findChefByMail ($mail){
 
 function findHistoriqueByMail ($mail)
 {
-	$req = "select * from f_choisirformation cf, utilisateur u
-			where cf.numutilisateur = u.numutilisateur
-			and u.mailutilisateur = (:lemail) and statutFormation = 'effectuée'";
-	$stmt = initRequete($req, $mail);
-
-	if ($stmt->execute() === false)
+	$pdo = initDB();
+	$numUtilisateur = findUserByMail($mail);
+	$sql = "select contenuFormation from f_choisirformation cf, f_formation f
+			where f.dateFormation > CURDATE()
+			and cf.numFormation = f.numFormation
+			and cf.numUtilisateur = (:lutilisateur)";
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':lutilisateur', $numUtilisateur);
+	if ($stmt->execute() === true)
 	{
-		$retour = "PAS D'HISTORIQUE";
+		$retour = $stmt->fetch();
 	}
 	else {
-		$retour = $stmt->fetch();
+		$retour = "AUCUNE FORMATION DANS L'HISTORIQUE";
 	}
 	return $retour;
 }
@@ -123,19 +126,38 @@ function findStatutByMail($mail)
 }
 function findFormationByMail ($mail)
 {
-	$req = "select * from f_choisirFormation where mailUtilisateur = (:lemail)";
-	$stmt = initRequete($req, $mail);
+	$pdo = initDB();
+	$numUtilisateur = findUserByMail($mail);
+	$sql = "select contenuFormation 
+			from f_formation f, f_choisirFormation cf 
+			where cf.numUtilisateur = (:lutilisateur) 
+			and cf.statutFormation = 'validée'
+			and f.numformation = cf.numformation";
+	$stmt = $pdo->prepare($sql);
 	if ($stmt === false)
 		$retour = "ERREUR DE FORMATION";
-		else{
-			$tab = $stmt->fetch();
-			if (empty($tab))
-				$retour = "Vous n'avez pas encore choisi de formation";
-				else
-					$retour = $tab;
+	else{
+		$tab = $stmt->fetch();
+		if (empty($tab))
+			$retour = "Vous n'avez pas encore choisi de formation";
+		else
+			$retour = $tab;
 		}
-		return $retour;
-		header('location: ../ShowPages/maPage.php');
+	return $retour;
+	//header('location: ../ShowPages/maPage.php');
+}
+
+function findUserByMail ($mail)
+{
+	$pdo = initDB();
+	$sql = "select numUtilisateur from f_utilisateur where mailUtilisateur = (:lemail)";
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':lemail', $mail);
+	if ($stmt->execute() == true)
+		$retour = $stmt->fetch()[0];
+		else
+			$retour = 'UTILISATEUR INTROUVABLE';
+			return $retour;
 }
 //TODO implémenter la fonction
 function askPower ($mail)

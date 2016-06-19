@@ -24,22 +24,8 @@ if (isset($_POST['openStory']))
 	}
 }
 if (isset($_SESSION['h'])){
-	$historique = findHistoriqueByMail($mail);
-		if (gettype ( $historique ) == array ()) {
-			foreach ( $$historique as $val4 ) {
-				$tab = array (
-					prestafomation => $val4 [1],
-					dateformation => $val4 [2],
-					dureeformation => $val4 [3],
-					lieuformation => $val4 [4],
-					creditformation => $val4 [5],
-					contenuformation => $val4 [6]
-			);
-		}
-	} 
-		else {
-			$tab = $historique;
-	}
+	unset($_SESSION['h']);
+	$historique = findHistoriqueByMail($mail);		
 }
 
 

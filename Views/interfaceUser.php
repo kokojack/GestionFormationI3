@@ -83,7 +83,7 @@
 		if (gettype ($formation) == array ()) {
 			$j = 1;
 			foreach ( $formation as $val ) {
-				echo $j . '<h5> 1- ' . $val;
+				echo '<h5>'.$j .'- ' . $val.'<br>';
 				$j ++;
 			}
 		}
@@ -98,10 +98,19 @@
 <?php }
 
 	if (isset ( $historique )) {
+		//var_dump($historique);
 		?>
 <div class="intitule">
 	<?php
-		echo '<br>' . $tab . '<br>'?>
+	if (gettype($historique) != array()) {
+ 		$i = 1;
+		echo $i.'- '.$historique['contenuFormation'] . '<br>';
+		$i++;	
+	}
+	else {
+		echo $historique;
+	}
+		?>
 		<br> 
 		<form action="#" method="POST">
 <!-- 		<a href="../FunctionPages/initMonHistorique.php"> -->
@@ -120,7 +129,8 @@
 			</button>
 		</a>
 </div>
-	<?php if (isset($training))
+	<?php 
+	if (isset($training))
 	{
 		echo '<div class="intitule">';
 		if ($training == "VIDE" )
@@ -134,8 +144,7 @@
 			}
 		echo '</div>';
 	}
-	?>
-	<?php if ($statut == "Je suis chef"){?>
+ if ($statut == "Je suis chef"){?>
 	<div class="intitule">
 		<form action="#" method="POST">
 		Email: <br>
