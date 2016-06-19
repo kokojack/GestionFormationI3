@@ -77,6 +77,7 @@ body {
 	padding-top: 0.5%;
 	padding-bottom: 0.5%;
 	text-align: center;
+	overflow: scroll;
 }
 
 button, intitule {
@@ -155,4 +156,97 @@ button, intitule {
 	display: inline;
 	position: relative;
 	text-align: center;
+}
+
+
+.scroll
+{
+	position: inherite;
+	clear: both;
+	/*overflow: scroll;*/
+	margin: 0.5%;
+	padding:0.5%;
+	width: auto;
+	height: auto;
+}
+
+	#scrollbar::-webkit-scrollbar
+	{
+		width: 2%;
+		background-color:gainsboro;
+		clear: left;
+	} 
+	
+	#scrollbar::-webkit-scrollbar-button       
+	{ 
+		
+	}
+	
+	#scrollbar::-webkit-scrollbar-track        
+	{ 
+		
+	}
+	
+	#scrollbar::-webkit-scrollbar-track-piece  
+	{ 
+		
+	}
+	
+	#scrollbar::-webkit-scrollbar-thumb /* la barre qui bouge lors du défilement*/      
+	{ 
+		background-color: gray;
+		border-radius:10px; 
+	}
+	#scrollbar::-webkit-scrollbar-thumb:hover /* pendant que la souris passe dessus */ 
+	{
+		background-color: Gainsboro;
+		border:1px solid #333333;
+	}
+	#scrollbar::-webkit-scrollbar-thumb:active /* lorsque qu'on clique dessus */
+	{
+		background-color: #f1f4f7;
+		border:1px solid #333333;
+	} 
+	#scrollbar::-webkit-scrollbar-corner       
+	{  
+		
+	}
+	
+	#scrollbar::-webkit-resizer                
+	{  
+		 
+	}
+	@media only screen and (max-wdith : 200px)
+{
+		.intitule {
+	display: inline-block;
+	background-color: Red;
+	vertical-align: top;
+	width: 17%;
+	height: 20%;
+	border: 2px groove black;
+	margin: 1%;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
+	text-align: center;
+	overflow: scroll;
+}
+		
+		.scroll
+	{
+	position: inherite;
+	clear: both;
+	/*overflow: scroll;*/
+	margin: 0.5%;
+	padding:0.5%;
+	width: auto;
+	height: auto;
+	}
+
+	#scrollbar::-webkit-scrollbar
+	{
+		width: 2%;
+		background-color:red;
+		clear: left;
+	} 
 }
