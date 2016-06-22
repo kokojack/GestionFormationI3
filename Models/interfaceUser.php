@@ -71,11 +71,13 @@ function findHistoriqueByMail ($mail)
 	$stmt->bindParam(':lutilisateur', $numUtilisateur);
 	if ($stmt->execute() === true)
 	{
-		$retour = $stmt->fetch();
+		$result = $stmt->fetch();
+		if (!empty($result))
+			$retour = $result;
+		else 
+			$retour = "AUCUNE FORMATION DANS L'HISTORIQUE";	
 	}
-	else {
-		$retour = "AUCUNE FORMATION DANS L'HISTORIQUE";
-	}
+	
 	return $retour;
 }
 
@@ -144,7 +146,6 @@ function findFormationByMail ($mail)
 			$retour = $tab;
 		}
 	return $retour;
-	//header('location: ../ShowPages/maPage.php');
 }
 
 function findUserByMail ($mail)

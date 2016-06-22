@@ -80,6 +80,10 @@ if (isset ( $_GET ['page'] )) {
 	{
 		require_once $_GET['page'];
 	}
+	elseif ($_GET['page'] == 'Controllers/validerFormation.php')
+	{
+		require_once 'Controllers/validerFormations.php';
+	}
 	
 	if (isset($_GET['page']))
 		echo $_GET ['page'].'<br>';

@@ -27,7 +27,7 @@ if (isset($_SESSION['h'])){
 	unset($_SESSION['h']);
 	$historique = findHistoriqueByMail($mail);		
 }
-
+//----------------------------------FIN------------------------------------------------------------------//
 
 //-----------------Session pour les formations choisies-----------------
 if (isset($_POST['closeTraining'])){
@@ -46,10 +46,9 @@ if (isset($_SESSION['t']))
 {
 	unset($_SESSION['t']);
 	$formation = findFormationByMail($mail);
-	//header('location:index.php?page=Controllers/formations.php');
 	echo 'Display formations';
 }
-
+//----------------------------------FIN------------------------------------------------------------------//
 
 //-----------------Session pour le choix de formations -----------------
 if (isset($_POST['chooseTraining']))
@@ -58,7 +57,6 @@ if (isset($_POST['chooseTraining']))
 	{
 // 		unset($_SESSION['ct']);
 		header('location:index.php?page=Controllers/formations.php');
-//		$training = formationDisponible();
 	}
 	else 
 		$_SESSION['ct'] = 1;
@@ -67,6 +65,29 @@ if (isset($_POST['finishChoose']))
 {
 	unset($_SESSION['ct']);
 }
+//-----------------------------------FIN--------------------------------------------------------------//
 
+//----------------Session pour la validation de formations ---------------------
+if (isset($_POST['toCheck']))
+{
+	if (isset($_SESSION['tc']))
+	{
+		//unset($_SESSION['tc']);
+		header('location: index.php?page=Controllers/validerFormations.php');
+	}
+	else 
+	{
+		$_SESSION['ct'] = 1;
+		header('location: index.php?page=Controllers/validerFormations.php');
+	}
+}
+if (isset($_POST['finishCheck']))
+	unset($_SESSION['tc']);
+//----------------------------------FIN------------------------------------------------------------------//
+	
+	
+	
+	
+	
 require_once 'Views/interfaceUser.php';
 ?>

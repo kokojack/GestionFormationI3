@@ -102,13 +102,14 @@
 		?>
 <div class="intitule">
 	<?php
-	if (gettype($historique) != array()) {
+	if (gettype($historique) == "array") {
  		$i = 1;
 		echo $i.'- '.$historique['contenuFormation'] . '<br>';
 		$i++;	
 	}
 	else {
 		echo $historique;
+		
 	}
 		?>
 		<br> 
@@ -147,10 +148,10 @@
  if ($statut == "Je suis chef"){?>
 	<div class="intitule">
 		<form action="#" method="POST">
-		Email: <br>
+		Email: <br><br>
 		<input type="email" name="mail" placeHolder="nouvel.Admin@M2L.com" required>
-		<br>
-		<input type ="submit" value="NewAdmin">
+		<br><br>
+		<input type ="submit" name="givePower" value="NewAdmin">
 		</form>
 		<?php
 		if (isset($_SESSION['power']))
