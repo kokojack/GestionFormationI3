@@ -7,13 +7,14 @@ require_once 'Models/validerFormations.php';
 
 session_start();
 $mail = $_SESSION['email'];
+$num = $_SESSION['numFormation'];
+
 
 if (isset($_POST['valider']))
 {
 	extract($_POST);
-	$num = $_SESSION['numformation'];
-	// 			var_dump( $num);
-	// 			var_dump($mail);
+				var_dump($num);
+				var_dump($mail);
 	// 			var_dump(findUserByMail($mail));
 	// 			var_dump(addValiderFormation($num, findUserByMail($mail)));
 	// 			var_dump(choixFormation($num, $mail));
@@ -25,9 +26,6 @@ if (isset($_POST['retour']))
 	echo $_SESSION['email'];
 	header('location:index.php?page=Controllers/interfaceUser.php');
 }
-require_once 'Views/formations.php';
-//require_once 'C:/DEV/php/phpProjects/EasyPHP-DevServer-14.1VC9/data/localweb/projects/GestionFormationI3/Views/formations.php';
-
 
 
 

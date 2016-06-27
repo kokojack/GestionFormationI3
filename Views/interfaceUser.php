@@ -14,7 +14,7 @@
 
 
 <div id="libelle">
-	<div class="intitule">
+	<div class="scroll" class="intitule">
 		<button>
 		<b>
 			<?= $nom." ".$prenom ?>

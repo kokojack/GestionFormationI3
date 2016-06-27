@@ -80,9 +80,9 @@ if (isset ( $_GET ['page'] )) {
 	{
 		require_once $_GET['page'];
 	}
-	elseif ($_GET['page'] == 'Controllers/validerFormation.php')
+	elseif ($_GET['page'] == 'Controllers/validerFormations.php')
 	{
-		require_once 'Controllers/validerFormations.php';
+		require_once $_GET['page'];
 	}
 	
 	if (isset($_GET['page']))

@@ -7,14 +7,14 @@ function formationDisponible($mail){
 	$format = "yyyy-mm-dd";
 	$date = date($format);
 	$numUtilisateur = findUserByMail($mail);
-	$sql = "select f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
+	$sql = "SELECT f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
 			f.lieuFormation, f.creditFormation, contenuFormation 
-			from f_formation f, f_choisirformation cf
-			where f.dateFormation > CURDATE() 
-			and (select count(*) from f_choisirformation
-				 where cf.numUtilisateur = (:lutilisateur)
-				 and cf.numFormation = f.numFormation) = 0
-			order by f.numFormation";
+			FROM f_formation f, f_choisirformation cf
+			WHERE f.dateFormation > CURDATE() 
+			AND (SELECT count(*) FROM f_choisirformation cf, f_formation f
+				 WHERE (cf.numUtilisateur = (:lutilisateur)
+				 AND cf.numFormation = f.numFormation)) = 0
+			ORDER BY f.numFormation";
 	//$sql = "call formationDisponible()";
 	$stmt = $pdo->prepare ( $sql );
 	//$stmt->bindParam(':dateFormation', $date);
@@ -37,15 +37,16 @@ function formationIndisponible($mail)
 	$format = "yyyy-mm-dd";
 	$date = date($format);
 	$numUtilisateur = findUserByMail($mail);
-	$sql = "select f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
+	$sql = "SELECT DISTINCT f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
 			f.lieuFormation, f.creditFormation, f.contenuFormation 
-			from f_formation f, f_choisirformation cf 
-			where dateFormation < CURDATE() 
-			or
-			(select count(*) from f_choisirformation
-				 where cf.numUtilisateur = (:lutilisateur)
-				 and cf.numFormation = f.numFormation) != 0
-			order by f.numFormation";
+			FROM f_formation f, f_choisirformation cf 
+			WHERE dateFormation < CURDATE() 
+			OR
+			(SELECT count(*) 
+				FROM f_choisirformation f, f_choisirformation cf
+				 WHERE cf.numUtilisateur = (:lutilisateur)
+				 AND cf.numFormation = f.numFormation) != 0
+			ORDER BY f.numFormation";
 	$stmt = $pdo->prepare ( $sql );
 	//$stmt->bindParam(':dateFormation', $date);
 	$stmt->bindParam(':lutilisateur', $numUtilisateur);
