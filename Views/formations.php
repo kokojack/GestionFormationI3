@@ -24,17 +24,15 @@
 		
 		if ($disponibles == "VIDE" )
 		{
-			echo '<div align="center">';
-			echo 'PAS DE FORMATIONS DISPONIBLES POUR LE MOMENT'; 
+			echo '<h4>PAS DE FORMATIONS DISPONIBLES POUR LE MOMENT</h4>'; 
 			echo '<br><br><br></div><hr width="50%" /><br><br><br>';
 		}
 		else 
 			{
 				$i = 0;
-				echo '<div align="center">';
 				while ($i < sizeof($disponibles)){?>
-				<div class="intitule" class="scroll">
 				<form action="#" method="POST">
+				<div class="intitule">
 				<?php 
 				echo '<hr width="30%" />';
 				echo 'Formateur : '.$disponibles[$i]['prestaFormation'].'<br><br>';
@@ -46,12 +44,11 @@
 				$_SESSION['num'] = $disponibles[$i]['numFormation'];
 				?>
 				<input type="submit" name="choisir" value="choisir cette formation">
-				</form>
 				</div>
+				</form>
 				<?php
 				$i++;
 				}
-				echo '</div>';
 				echo '<hr width="100%" />';
 			}
 		?>
@@ -64,29 +61,25 @@
 		$indisponibles = formationIndisponible($mail);
 		
 		if ($indisponibles == "VIDE" )
-			echo 'PAS DE FORMATIONS INDISPONIBLES POUR LE MOMENT';
+			echo '<h4>PAS DE FORMATIONS INDISPONIBLES POUR LE MOMENT</h4>';
 		else
 			{
 				$j = 0; 
-				echo '<div align="center">';
 				while ($j < sizeof($indisponibles))
 				{?>
-					<div  class="intitule"> 
-<!-- 					id="libelle" -->
+					 
 					<?php 
+					echo '<div  class="intitule">';
 					echo '<hr width="30%" />';
 					echo 'Formateur : '.$indisponibles[$j]['prestaFormation'].'<br><br>';
 					echo 'Date de formation : '.$indisponibles[$j]['dateFormation'].'<br><br>';
-					echo 'Durée de formation : '.$indisponibles[$j]['dureeFormation'].' jour (s) <br><br>';
+					echo 'Durée de formation : '.$indisponibles[$j]['dureeFormation'].' jour (s)<br><br>';
 					echo 'Adresse de formation : '.$indisponibles[$j]['lieuFormation'].'<br><br>';
 					echo 'crédits de formation : '.$indisponibles[$j]['creditFormation'].'<br><br>';
 					echo 'intitulé de formation : '.$indisponibles[$j]['contenuFormation'].'<br>';
-					?>
-					</div>
-					<?php 
+					echo '</div>';
 					$j++;
 				}
-				echo '</div>';
 			}
 			?>
 			

@@ -68,16 +68,18 @@ body {
 
 .intitule {
 	display: inline-block;
+	position: relative;
+	float:left;
+	clear:none;
 	background-color: Gainsboro;
 	vertical-align: top;
-	width: 17%;
+	width: 20%;
 	height: 20%;
 	border: 2px groove black;
 	margin: 1%;
-	padding-top: 0.5%;
-	padding-bottom: 0.5%;
+	padding: 0.5%;
 	text-align: center;
-	overflow: auto;
+	overflow: scroll;
 }
 
 button, intitule {
@@ -162,8 +164,9 @@ button, intitule {
 .scroll
 {
 	position: inherite;
+	float: left;
 	clear: both;
-	overflow: auto;
+	overflow: scroll;
 	margin: 0.5%;
 	padding:0.5%;
 	width: auto;
@@ -216,7 +219,7 @@ button, intitule {
 	{  
 		 /*design de corner*/
 	}
-	@media only screen and (max-wdith : 200px)
+	@media only screen and (max-width : 200px)
 {
 		.intitule {
 	display: inline-block;

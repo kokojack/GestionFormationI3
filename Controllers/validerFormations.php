@@ -7,7 +7,8 @@ require_once 'Models/validerFormations.php';
 
 session_start();
 $mail = $_SESSION['email'];
-$num = $_SESSION['numFormation'];
+if (isset($_SESSION['numFormation']))
+	$num = $_SESSION['numFormation'];
 
 
 if (isset($_POST['valider']))

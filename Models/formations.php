@@ -7,13 +7,14 @@ function formationDisponible($mail){
 	$format = "yyyy-mm-dd";
 	$date = date($format);
 	$numUtilisateur = findUserByMail($mail);
-	$sql = "SELECT f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
-			f.lieuFormation, f.creditFormation, contenuFormation 
+	$sql = "SELECT DISTINCT f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
+			f.lieuFormation, f.creditFormation, f.contenuFormation 
 			FROM f_formation f, f_choisirformation cf
 			WHERE f.dateFormation > CURDATE() 
-			AND (SELECT count(*) FROM f_choisirformation cf, f_formation f
-				 WHERE (cf.numUtilisateur = (:lutilisateur)
-				 AND cf.numFormation = f.numFormation)) = 0
+			AND
+            cf.numFormation != f.numFormation
+            AND
+            cf.numUtilisateur = (:lutilisateur)
 			ORDER BY f.numFormation";
 	//$sql = "call formationDisponible()";
 	$stmt = $pdo->prepare ( $sql );
@@ -40,12 +41,11 @@ function formationIndisponible($mail)
 	$sql = "SELECT DISTINCT f.numFormation, f.prestaFormation, f.dateFormation, f.dureeFormation, 
 			f.lieuFormation, f.creditFormation, f.contenuFormation 
 			FROM f_formation f, f_choisirformation cf 
-			WHERE dateFormation < CURDATE() 
+			WHERE f.dateFormation < CURDATE() 
 			OR
-			(SELECT count(*) 
-				FROM f_choisirformation f, f_choisirformation cf
-				 WHERE cf.numUtilisateur = (:lutilisateur)
-				 AND cf.numFormation = f.numFormation) != 0
+            (cf.numFormation = f.numFormation
+            AND
+            cf.numUtilisateur = (:lutilisateur))
 			ORDER BY f.numFormation";
 	$stmt = $pdo->prepare ( $sql );
 	//$stmt->bindParam(':dateFormation', $date);
